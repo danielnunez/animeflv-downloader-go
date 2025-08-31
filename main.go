@@ -262,6 +262,8 @@ func writeDownloadsToFile(animeName string, episodes []Episode, allDownloads map
 		fmt.Fprintf(file, "\n")
 	}
 
+	ProcessFileToMetalink(filename, filename+".metalink")
+
 	return nil
 }
 
@@ -391,7 +393,7 @@ func getEpisodesWithHTTP(animeLink string) ([]Episode, error) {
 
 // processAnimes procesa la lista de animes y permite al usuario seleccionar uno
 func processAnimes(animesList []Anime) error {
-	fmt.Println("Lista de animes disponibles:\n")
+	fmt.Println("Lista de animes disponibles:")
 
 	for i, anime := range animesList {
 		fmt.Printf("%d.- Anime: %s, enlace: %s\n", i+1, anime.Name, anime.Link)
@@ -416,7 +418,7 @@ func processAnimes(animesList []Anime) error {
 
 	selectedAnime := animesList[option-1]
 	fmt.Printf("Seleccionado: %s, %s\n", selectedAnime.Name, selectedAnime.Link)
-	fmt.Println("\nProcesando episodios...\n")
+	fmt.Println("\nProcesando episodios...")
 
 	episodesList, err := getLinksEpisodes(selectedAnime.Name, selectedAnime.Link)
 	if err != nil {
